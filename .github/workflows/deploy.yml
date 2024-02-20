@@ -1,12 +1,11 @@
-name: Deploy
-
+name: Build and Deploy
 on:
   push:
     branches:
-      - main  # Set a branch to trigger deployment
+      - main  # Set a branch name to trigger deployment
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,7 +23,7 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Set your build folder
+          branch: gh-pages  # GitHub Pages branch
+          folder: build  # Folder to deploy
